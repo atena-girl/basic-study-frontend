@@ -5,19 +5,23 @@
 </template>
 
 <script>
-export default {
-  name: 'InputBox',
-  data() {
-    return{
-      item: "",
-  }
-},
-  methods: {
-    onSave() {
-      /*Todo axios를 이용하여 db에 값을 넣고 리스트로 보여주는 기능 개발*/
+  import axios from "axios";
+  export default {
+    name: 'InputBox',
+    data() {
+      return{
+        item: "",
+    }
+  },
+    methods: {
+      onSave() {
+        axios.post('http://localhost:8081/saveList', {title: "vue.js는 조으다."})
+            .then(res => {
+              console.log(res.data)
+            })
+      }
     }
   }
-}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
