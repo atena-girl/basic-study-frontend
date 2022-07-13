@@ -15,7 +15,7 @@
   },
     methods: {
       onSave() {
-        axios.put('http://localhost:8081/saveList', {title: "vue.js는 조으다."})
+        axios.put('http://localhost:8081/saveList', {newContent: this.item})
             .then(res => {
               console.log(res.data)
             })
