@@ -1,12 +1,13 @@
 <template>
   <div class="home">
-    <InputBox/>
+    <InputBox @itemsFromInputBox="itemsFromChild" />
     <ul>
       <li>test</li>
       <li v-for="item in items" :key="item.contentKey">
         {{ item.content }}
       </li>
     </ul>
+
   </div>
 </template>
 
@@ -28,13 +29,14 @@ export default {
   mounted() {
     axios.get('http://localhost:8081/getList')
         .then(res => {
-          console.log(res, res.data);
           this.items = res.data;
           console.log(this.items);
         })
   },
   methods: {
-
+    itemsFromChild (itemsFromInputBox) {
+      this.items = itemsFromInputBox;
+    }
   }
 
 }

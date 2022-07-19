@@ -18,6 +18,15 @@
         axios.put('http://localhost:8081/saveList', {newContent: this.item})
             .then(res => {
               console.log(res.data)
+              this.resetItems();
+            })
+      },
+      resetItems() {
+        axios.get('http://localhost:8081/getList')
+            .then(res => {
+              console.log('safdasfdsafd', res.data);
+              this.$emit("itemsFromInputBox", res.data) ;
+              console.log(this.items);
             })
       }
     }
