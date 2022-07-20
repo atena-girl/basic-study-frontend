@@ -1,10 +1,10 @@
 <template>
   <div class="home">
     <InputBox @itemsFromInputBox="itemsFromChild" />
+    <button @click="onDelete()">checked 삭제</button>
     <ul>
-      <li>test</li>
-      <li v-for="item in items" :key="item.contentKey">
-        {{ item.content }}
+      <li v-for="(item, index) in items" :key="item.contentKey">
+        {{ item.content }} <input type="checkbox" v-model="checkedValues[index]" @click="toggle"/>
       </li>
     </ul>
 
@@ -23,6 +23,8 @@ export default {
   },
   data (){
     return{
+      checkedValues : [],
+      beDeletedItems : [],
       items : [],
     }
   },
@@ -36,6 +38,16 @@ export default {
   methods: {
     itemsFromChild (itemsFromInputBox) {
       this.items = itemsFromInputBox;
+    },
+    onDelete(){
+      let deletedIndexList=[];
+      for (let i = 0; i < this.checkedValues.length; i++) {
+        if(this.checkedValues[i]===true){
+          deletedIndexList.push(this.items[i].contentKey);
+        }
+      }
+
+      alert(deletedIndexList)
     }
   }
 
