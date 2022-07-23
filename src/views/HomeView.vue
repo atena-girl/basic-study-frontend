@@ -4,7 +4,7 @@
     <button @click="onDelete()">checked 삭제</button>
     <ul>
       <li v-for="(item, index) in items" :key="item.contentKey">
-        {{ item.content }} <input type="checkbox" v-model="checkedValues[index]" @click="toggle"/>
+        {{ item.content }} <input type="checkbox" v-model="checkedValues[index]" />
       </li>
     </ul>
 
@@ -47,7 +47,17 @@ export default {
         }
       }
 
-      alert(deletedIndexList)
+      axios.delete('http://localhost:8081/deleteItem', {data:{deletedIndexList}})
+          .then(res => {
+            console.log(res.data);
+            this.resetItems();
+          })
+    },
+    resetItems() {
+      axios.get('http://localhost:8081/getList')
+          .then(res => {
+            this.items = res.data
+          })
     }
   }
 

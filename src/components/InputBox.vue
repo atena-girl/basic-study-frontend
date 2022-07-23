@@ -24,7 +24,6 @@
       resetItems() {
         axios.get('http://localhost:8081/getList')
             .then(res => {
-              console.log('safdasfdsafd', res.data);
               this.$emit("itemsFromInputBox", res.data) ;
               console.log(this.items);
             })
