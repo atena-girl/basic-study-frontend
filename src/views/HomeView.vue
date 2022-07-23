@@ -50,6 +50,7 @@ export default {
       axios.delete('http://localhost:8081/deleteItem', {data:{deletedIndexList}})
           .then(res => {
             console.log(res.data);
+            this.checkedValues=[];
             this.resetItems();
           })
     },
